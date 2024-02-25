@@ -1,0 +1,244 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.blink-on-change {
+    animation-name: blink;
+    animation-duration: 1s;
+}
+
+@keyframes blink {
+    0% {
+        background-color: #9addfc;
+    }
+    25% {
+        background-color: rgba(154, 221, 252, 0.75);
+    }
+    50% {
+        background-color: rgba(154, 221, 252, 0.5);
+    }
+    75% {
+        background-color: rgba(154, 221, 252, 0.25);
+    }
+    100% {
+        background-color: rgba(87, 207, 255, 0);
+    }
+}
+
+html, body {
+    max-width: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.outer-ring {
+    height: 128px;
+    width: 128px;
+    border-radius: 100%;
+}
+
+.inner-ring {
+    position: relative;
+    top: 3px;
+    height: 122px;
+    width: 122px;
+    background-color: white;
+    border-radius: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/*.theme-dark-text {*/
+/*    color: rgba(255, 255, 255, 0.87) !important;*/
+/*}*/
+
+/*.theme-dark-text-secondary {*/
+/*    color: rgba(255, 255, 255, 0.60) !important;*/
+/*}*/
+
+/*.theme-dark-text-disabled {*/
+/*    color: rgba(255, 255, 255, 0.38) !important;*/
+/*}*/
+
+/*.theme-dark-background {*/
+/*    background-color: rgb(30, 33, 37) !important;*/
+/*}*/
+
+/*.theme-dark-background-light {*/
+/*    background-color: rgb(35, 38, 42) !important;*/
+/*}*/
+
+/*.theme-dark-modal-background {*/
+/*    background-color: rgb(55, 61, 68) !important;*/
+/*}*/
+
+/*.theme-dark-modal-background-transparent {*/
+/*    background-color: rgb(55, 61, 68, 0.75) !important;*/
+/*}*/
+
+/*.theme-dark-input {*/
+/*    background-color: rgb(39, 43, 48) !important;*/
+/*}*/
+
+/*.input-group-text {*/
+/*    background-color: rgb(35, 38, 42) !important;*/
+/*    color: rgba(255, 255, 255, 0.60) !important;*/
+/*    border-color: #212529 !important;*/
+/*}*/
+
+/*.form-control {*/
+/*    background-color: rgb(39, 43, 48) !important;*/
+/*    color: rgba(255, 255, 255, 0.87) !important;*/
+/*    border-color: #212529 !important;*/
+/*}*/
+
+/*.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {*/
+/*    color: rgba(255, 255, 255, 0.38) !important;*/
+/*}*/
+
+.input-group-text-prepend-30 {
+    flex: 0 0 30%;
+}
+
+.input-group-text-prepend-40 {
+    flex: 0 0 40%;
+}
+
+.input-group-text-prepend-45 {
+    flex: 0 0 40%;
+}
+
+.input-group-text-prepend-50 {
+    flex: 0 0 50%;
+}
+
+.input-group-text-prepend-55 {
+    flex: 0 0 55%;
+}
+
+.input-group-text-prepend-60 {
+    flex: 0 0 60%;
+}
+
+.input-group-text-prepend-70 {
+    flex: 0 0 70%;
+}
+
+.input-group-text-prepend-80 {
+    flex: 0 0 80%;
+}
+
+/*.card {*/
+/*    background-color: rgb(35, 38, 42) !important;*/
+/*    color: rgba(255, 255, 255, 0.87) !important;*/
+/*}*/
+
+/*.react-bootstrap-table th {*/
+/*    position: sticky;*/
+/*    top: 1px;*/
+/*    background-color: #fff;*/
+/*}*/
+
+/*h1, h2, h3, h4, h5, h6 {*/
+/*    color: rgba(255, 255, 255, 0.87) !important;*/
+/*}*/
+
+/*.caption {*/
+/*    font-size: 14px;*/
+/*    color: rgba(255, 255, 255, 0.87)*/
+/*}*/
+
+.graph-wrapper {
+    height: 128px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.text-big {
+    font-size: 18px;
+}
+
+.text-medium {
+    font-size: 14px;
+}
+
+.button-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.button-icon:hover {
+    transform: scale(1.25);
+}
+
+.w-35 {
+    width: 35% !important;
+}
+
+.w-40 {
+    width: 40% !important;
+}
+
+.min-vw-50 {
+    min-width: 50vw !important
+}
+
+/*.form-control::placeholder { !* Chrome, Firefox, Opera, Safari 10.1+ *!*/
+/*    color: white !important;*/
+/*    opacity: 1; !* Firefox *!*/
+/*}*/
+
+/*.form-control:-ms-input-placeholder { !* Internet Explorer 10-11 *!*/
+/*    color: white !important;*/
+/*}*/
+
+/*.form-control::-ms-input-placeholder { !* Microsoft Edge *!*/
+/*    color: white !important;*/
+/*}*/
+
+::-webkit-scrollbar {
+    width: 0px;
+}
