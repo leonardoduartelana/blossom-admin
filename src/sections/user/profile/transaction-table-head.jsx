@@ -4,9 +4,10 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 
+
 // ----------------------------------------------------------------------
 
-export default function UserTableHead({
+export default function TransactionTableHead({
   headLabel,
 }) {
   return (
@@ -26,6 +27,6 @@ export default function UserTableHead({
   );
 }
 
-UserTableHead.propTypes = {
+TransactionTableHead.propTypes = {
   headLabel: PropTypes.array
 };
