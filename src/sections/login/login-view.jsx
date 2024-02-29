@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {useAuthState} from "react-firebase-hooks/auth";
 
@@ -19,6 +19,8 @@ import Iconify from 'src/components/iconify';
 import {account} from "../../account";
 import useViewModel from "./viewmodel/LoginViewModel"
 import {auth, signInWithGooglePopup} from "./Firebase";
+import Avatar from "@mui/material/Avatar";
+import {LoadingButton} from "@mui/lab";
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +31,7 @@ export default function LoginView() {
 
     const {getProfile, profile} = useViewModel()
     const [firebaseUser, firebaseLoading, firebaseError] = useAuthState(auth);
+    const [loading, setLoading] = useState(false)
 
     const signInWithGoogle = async () => {
         await signInWithGooglePopup();
@@ -47,16 +50,19 @@ export default function LoginView() {
     useEffect(() => {
         if (firebaseUser) {
             // logout()
+            setLoading(true)
             getProfile()
         }
     }, [firebaseUser, router])
 
     useEffect(() => {
         if(profile) {
+
             account.fromProfile(profile)
             setTimeout(() => {
+                setLoading(false)
                 router.push('/customers');
-            }, 100)
+            }, 1000)
         }
     }, profile)
     return (
@@ -82,25 +88,35 @@ export default function LoginView() {
                     sx={{
                         p: 5,
                         width: 1,
-                        maxWidth: 420,
+                        maxWidth: 420
                     }}
                 >
-                    <Typography variant="h4" sx={{mt: 2, mb: 5, align: 'center'}}>Sign in</Typography>
+                    <Stack direction="column" alignItems="center" justifyContent="center">
+                        <Avatar src="/assets/logo.svg" sx={{ width: '128px', height: '128px'}}/>
 
-                    <Stack direction="row" spacing={2}>
-                        <Button
-                            fullWidth
-                            size="large"
-                            color="inherit"
-                            variant="outlined"
-                            onClick={() => {
-                                signInWithGoogle()
-                            }}
-                            sx={{borderColor: alpha(theme.palette.grey[500], 0.16)}}
-                        >
-                            <Iconify icon="eva:google-fill" color="#DF3E30"/>
-                        </Button>
+                        <Typography variant="h6" sx={{mt: 2, mb: 5, pl:1, pr:1, align: 'center', textAlign:'center'}}>Welcome to Blossom Bodyworks Admin</Typography>
+                        <Typography variant="subtitle1" sx={{mt: 1, mb: 1, align: 'center'}}>Please Sign In</Typography>
 
+                        {
+                            firebaseLoading || loading ?
+                                <LoadingButton loading size="large"
+                                               fullWidth="true"
+                                               color="inherit"
+                                               variant="outlined">
+                                    Submit
+                                </LoadingButton> : <Button
+                                    fullWidth
+                                    size="large"
+                                    color="inherit"
+                                    variant="outlined"
+                                    onClick={() => {
+                                        signInWithGoogle()
+                                    }}
+                                    sx={{borderColor: alpha(theme.palette.grey[500], 0.16)}}
+                                >
+                                    <Iconify icon="eva:google-fill" color="#DF3E30"/>
+                                </Button>
+                        }
                     </Stack>
                 </Card>
             </Stack>
