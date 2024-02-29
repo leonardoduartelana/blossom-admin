@@ -1,12 +1,27 @@
-import BaseResponse from "../api/base/BaseResponse";
 import CustomerApi from "../api/CustomerApi";
-import type RsCustomer from "../data/RsCustomer";
-import type RqSearchForCustomers from "../data/requests/RqSearchForCustomers";
 
 export default class CustomerService {
-    static instance = new CustomerService()
-
-    searchForCustomers(rqSearchForCustomers: RqSearchForCustomers): Promise<BaseResponse<RsCustomer[]>> {
+    static searchForCustomers(rqSearchForCustomers) {
         return CustomerApi.instance.searchForCustomers(rqSearchForCustomers)
+    }
+
+    static getCustomer(customerId) {
+        return CustomerApi.instance.getCustomer(customerId)
+    }
+
+    static getCustomerBalance(customerId) {
+        return CustomerApi.instance.getCustomerBalance(customerId)
+    }
+
+    static getCustomerTransactions(customerId) {
+        return CustomerApi.instance.getCustomerTransactions(customerId)
+    }
+
+    static executeCustomerTopUp(customerId, title, amount, note) {
+        return CustomerApi.instance.executeCustomerTopUp(customerId, title, amount, note)
+    }
+
+    static executeCustomerWithdraw(customerId, title, amount, note) {
+        return CustomerApi.instance.executeCustomerWithdraw(customerId, title, amount, note)
     }
 }

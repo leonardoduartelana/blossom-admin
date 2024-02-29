@@ -1,11 +1,14 @@
 import RequestError from "./RequestError";
-import ResponseCode from "../../data/ResponseCode";
+import ResponseCode from "../data/ResponseCode";
 
-export default class BaseResponse<T> {
+export default class BaseResponse {
 
     status = null
-    code: ResponseCode = null
-    data: T = null
+
+    code = null
+
+    data = null
+
     error = null
 
     constructor(status, code, data, error) {

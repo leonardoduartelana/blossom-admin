@@ -1,8 +1,6 @@
-import {getUserToken} from "../../presentation/login/Firebase";
 import BaseResponse from "./BaseResponse";
-import {useNavigate} from "react-router";
-import RequestError from "./RequestError";
-import ResponseCode from "../../data/ResponseCode";
+import ResponseCode from "../data/ResponseCode";
+import {getUserToken} from "../../sections/login/Firebase";
 
 export default class BaseRequest {
 
@@ -11,10 +9,13 @@ export default class BaseRequest {
     }
 
     LOCAL_SERVER = "http://127.0.0.1:5000"
-    PROD_SERVER = "https://api.blossombodyworks.co.nz"
+
+    // PROD_SERVER = "https://api.blossombodyworks.co.nz"
+
     SERVER_URL = this.LOCAL_SERVER
 
-    addHeaders(authenticated, requestOptions = {}): Promise {
+    // eslint-disable-next-line class-methods-use-this
+    addHeaders(authenticated, requestOptions = {}) {
         if (requestOptions.headers == null) {
             requestOptions.headers = {}
         }
@@ -24,46 +25,44 @@ export default class BaseRequest {
         }
 
         if (!authenticated) {
-            return new Promise(((resolve, reject) => resolve(requestOptions)))
-        } else {
-            return getUserToken().then((token) => {
-                if (requestOptions.headers == null) {
-                    requestOptions.headers = {}
-                }
-
-                requestOptions.headers['Authorization'] = 'Bearer ' + token
-                return requestOptions
-            }).catch(error => {
-                throw error
-            })
+            return new Promise(((resolve) => resolve(requestOptions)))
         }
+
+        return getUserToken().then((token) => {
+            if (requestOptions.headers == null) {
+                requestOptions.headers = {}
+            }
+
+            requestOptions.headers.Authorization = `Bearer ${token}`
+            return requestOptions
+        }).catch(error => {
+            throw error
+        })
     }
 
-    executeRequest(url, method, body, authenticated = true): Promise {
+    executeRequest(url, method, body, authenticated = true) {
         const requestOptions = {
-            method: method
+            method
         };
 
-        console.log('Executing: ' + url)
+        console.log(`Executing: ${url}`)
 
         let finalURL = this.SERVER_URL + url;
 
         if (body) {
             if (method === 'GET') {
-                finalURL = finalURL + '?' + new URLSearchParams(body)
+                finalURL = `${finalURL}?${new URLSearchParams(body)}`
+            } else if (body instanceof FormData) {
+                requestOptions.body = body
             } else {
-                if (body instanceof FormData) {
-                    requestOptions.body = body
-                } else {
-                    requestOptions.body = JSON.stringify(body)
-                }
+                requestOptions.body = JSON.stringify(body)
             }
         }
 
-        return this.addHeaders(authenticated, requestOptions).then((requestOptions) => {
-            return fetch(finalURL, requestOptions)
+        return this.addHeaders(authenticated, requestOptions)
+            .then((options) => fetch(finalURL, options)
                 .then(async (result) => {
-                    console.log('Response for: ' + url)
+                    console.log(`Response for: ${url}`)
                     console.log(result)
                     if (result.code === '500')
                         return new BaseResponse(null, null, null, "INTERNAL_SERVER_ERROR")
@@ -72,14 +71,11 @@ export default class BaseRequest {
                     try {
                         json = await result.json()
                     } catch (e) {
-                        console.log('Error parsing body of ' + url + ' | ' + e)
+                        console.log(`Error parsing body of ${url} | ${e}`)
                     }
                     console.log(json)
                     return new BaseResponse(json.status, ResponseCode.fromCode(json.code), json.data, null)
-                }, (error) => {
-                    return new BaseResponse(null, null, null, error)
-                })
-        })
+                }, (error) => new BaseResponse(null, null, null, error)))
     }
 
 }
