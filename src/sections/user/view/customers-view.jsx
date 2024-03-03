@@ -24,7 +24,7 @@ import useViewModel from "../viewmodels/CustomersViewModel"
 export default function CustomersPage() {
     const router = useRouter();
 
-    const {error, customers, searchCustomers} = useViewModel()
+    const {error, customers, searchCustomers, getAll} = useViewModel()
 
     useEffect(() => {
         console.log(`Error: ${JSON.stringify(error)}`)
@@ -48,6 +48,10 @@ export default function CustomersPage() {
     useEffect(() => {
         if (searchName.length > 2) {
             searchCustomers(searchName)
+        }
+
+        if(searchName.length === 0 || !searchName) {
+            getAll()
         }
     }, [searchName])
 

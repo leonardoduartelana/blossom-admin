@@ -20,7 +20,17 @@ export default function CustomersViewModel() {
         })
     }
 
+    function getAll() {
+        CustomerService.getAll().then((result) => {
+            if(result.isResponseCodeSuccessful()) {
+                setCustomers(result.data)
+            } else {
+                setError(result.error)
+            }
+        })
+    }
+
     return {
-        error, customers, searchCustomers
+        error, customers, searchCustomers, getAll
     }
 }

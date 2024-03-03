@@ -14,6 +14,14 @@ export default class CustomerApi {
     }
 
     // eslint-disable-next-line class-methods-use-this
+    getAll() {
+        return new BaseRequest().executeRequest(
+            '/api/v1/admin/customer',
+            'GET'
+        )
+    }
+
+    // eslint-disable-next-line class-methods-use-this
     getCustomer(customerId)  {
         return new BaseRequest().executeRequest(
             `/api/v1/admin/customer/${customerId}`,

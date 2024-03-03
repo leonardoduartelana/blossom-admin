@@ -5,6 +5,10 @@ export default class CustomerService {
         return CustomerApi.instance.searchForCustomers(rqSearchForCustomers)
     }
 
+    static getAll() {
+        return CustomerApi.instance.getAll()
+    }
+
     static getCustomer(customerId) {
         return CustomerApi.instance.getCustomer(customerId)
     }
