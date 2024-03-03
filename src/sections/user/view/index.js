@@ -1,1 +1,0 @@
-export { default as CustomersView } from './customers-view';
