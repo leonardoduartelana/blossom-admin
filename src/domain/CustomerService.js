@@ -21,6 +21,10 @@ export default class CustomerService {
         return CustomerApi.instance.getCustomerTransactions(customerId)
     }
 
+    static getCustomerLatestTransaction(customerId) {
+        return CustomerApi.instance.getCustomerLatestTransaction(customerId)
+    }
+
     static executeCustomerTopUp(customerId, title, amount, note) {
         return CustomerApi.instance.executeCustomerTopUp(customerId, title, amount, note)
     }

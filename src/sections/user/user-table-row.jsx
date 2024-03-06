@@ -7,6 +7,8 @@ import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 
 import RsCustomer from "../../api/data/RsCustomer";
+import useViewModel from "./viewmodels/CustomersViewModel";
+import {useEffect} from "react";
 
 // ----------------------------------------------------------------------
 
@@ -15,8 +17,24 @@ export default function UserTableRow({
                                          handleClick,
                                      }) {
 
+    const {customerBalance, getCustomerBalance, customerLatestTransaction, getCustomerLatestTransaction} = useViewModel()
+
+    useEffect(() => {
+        if(!customerBalance) {
+            getCustomerBalance(customer.id)
+        }
+    }, [customerBalance])
+
+    useEffect(() => {
+        if(!customerLatestTransaction) {
+            getCustomerLatestTransaction(customer.id)
+        }
+    }, [customerLatestTransaction])
+
     return (
-        <TableRow hover tabIndex={-1} role="checkbox">
+        <TableRow hover tabIndex={-1} role="checkbox" onClick={() => {
+            handleClick()
+        }}>
             <TableCell component="th" scope="row" padding="normal">
                 <Stack direction="row" alignItems="center" spacing={2}>
                     <Typography variant="subtitle2" noWrap>
@@ -26,18 +44,27 @@ export default function UserTableRow({
             </TableCell>
             <TableCell component="th" scope="row" padding="normal">
                 <Stack direction="row" alignItems="center" spacing={2}>
-                    <Typography variant="subtitle2" noWrap>
-                        {customer.email}
+                    <Typography variant="subtitle1" noWrap>
+                        {customerBalance?.balance}
                     </Typography>
                 </Stack>
             </TableCell>
             <TableCell component="th" scope="row" padding="normal">
                 <Stack direction="row" alignItems="center" spacing={2}>
-                    <Button onClick={() => {
-                        handleClick(customer)
-                    }}>
-                        View
-                    </Button>
+                    <Typography variant="subtitle2" color={customerLatestTransaction?.sign === 'dr' ? 'red' : 'green'} noWrap>
+                        {
+                            !customerLatestTransaction ? null : customerLatestTransaction?.sign === 'dr' ? `-${customerLatestTransaction?.amount}` : `+${customerLatestTransaction?.amount}`
+                        }
+                    </Typography>
+                </Stack>
+            </TableCell>
+            <TableCell component="th" scope="row" padding="normal">
+                <Stack direction="row" alignItems="center" spacing={2}>
+                    <Typography variant="caption" noWrap>
+                        {
+                            !customerLatestTransaction ? null : customerLatestTransaction?.title
+                        }
+                    </Typography>
                 </Stack>
             </TableCell>
         </TableRow>

@@ -55,6 +55,10 @@ export default function CustomersPage() {
         }
     }, [searchName])
 
+    useEffect(() => {
+        console.log(`customers -> ${JSON.stringify(customers)}`)
+    }, [customers])
+
     const notFound = !customers.length && !!searchName;
 
     return (
@@ -75,8 +79,9 @@ export default function CustomersPage() {
                             <UserTableHead
                                 headLabel={[
                                     {id: 'name', label: 'Name'},
-                                    {id: 'email', label: 'Email'},
-                                    {id: 'view', label: ''}
+                                    {id: 'balance', label: 'Balance'},
+                                    {id: 'last_transaction_amount', label: 'Recent Change'},
+                                    {id: 'last_transaction_title', label: 'Recent Change'}
                                 ]}
                             />
                             <TableBody>
@@ -84,6 +89,7 @@ export default function CustomersPage() {
                                     customers
                                         .map((row) => (
                                             <UserTableRow
+                                                key={row.id+row.balance}
                                                 customer={row}
                                                 handleClick={() => handleClick(row)}
                                             />

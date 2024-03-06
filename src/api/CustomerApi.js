@@ -46,6 +46,14 @@ export default class CustomerApi {
     }
 
     // eslint-disable-next-line class-methods-use-this
+    getCustomerLatestTransaction(customerId)  {
+        return new BaseRequest().executeRequest(
+            `/api/v1/admin/customer/${customerId}/transactions-latest`,
+            'GET'
+        )
+    }
+
+    // eslint-disable-next-line class-methods-use-this
     executeCustomerTopUp(customerId, title, amount, note) {
         return new BaseRequest().executeRequest(
             `/api/v1/admin/customer/${customerId}/top-up`,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
+import Stack from "@mui/material/Stack";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +19,9 @@ export default function UserTableHead({
             align={headCell.align || 'left'}
             sx={{ width: headCell.width, minWidth: headCell.minWidth }}
           >
-            {headCell.label}
+            <Stack direction="row" alignItems="center" spacing={2}>
+                {headCell.label}
+            </Stack>
           </TableCell>
         ))}
       </TableRow>
