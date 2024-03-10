@@ -12,6 +12,7 @@ export const account = {
     this.email = profile.email
     this.displayName = `${profile.firstName} ${profile.lastName}`
     this.id = profile.id
+    this.photoURL = profile.avatarUrl ? profile.avatarUrl : this.photoURL
   }
 
 };

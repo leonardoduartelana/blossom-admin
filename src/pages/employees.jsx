@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { CustomersView } from 'src/sections/customer/view';
+import {EmployeesView} from "../sections/employee";
 
 // ----------------------------------------------------------------------
 
-export default function CustomersPage() {
+export default function EmployeesPage() {
   return (
     <>
       <Helmet>
-        <title> Customers </title>
+        <title> Employees </title>
       </Helmet>
 
-      <CustomersView />
+      <EmployeesView />
     </>
   );
 }

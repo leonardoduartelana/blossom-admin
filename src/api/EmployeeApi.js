@@ -12,4 +12,11 @@ export default class EmployeeApi {
             )
     }
 
+    getAll()  {
+        return new BaseRequest().executeRequest(
+            '/api/v1/admin/employee',
+            'GET'
+        )
+    }
+
 }

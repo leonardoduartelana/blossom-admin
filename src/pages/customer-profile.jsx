@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import { CustomerProfileView } from 'src/sections/user/profile/';
+import { CustomerProfileView } from 'src/sections/customer/profile/';
 
 // ----------------------------------------------------------------------
 
