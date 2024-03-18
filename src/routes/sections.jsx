@@ -8,6 +8,7 @@ export const BlogPage = lazy(() => import('src/pages/blog'));
 export const CustomersPage = lazy(() => import('src/pages/customers'));
 export const CustomerProfilePage = lazy(() => import('src/pages/customer-profile'));
 export const EmployeesPage = lazy(() => import('src/pages/employees'));
+export const EmployeeProfilePage = lazy(() => import('src/pages/employee-profile'));
 export const CalendarPage = lazy(() => import('src/pages/calendar'));
 export const LoginPage = lazy(() => import('src/pages/login'));
 export const ProductsPage = lazy(() => import('src/pages/products'));
@@ -30,6 +31,7 @@ export default function Router() {
         { path: 'customers', element: <CustomersPage /> },
         { path: 'customer-profile', element: <CustomerProfilePage /> },
         { path: 'employees', element: <EmployeesPage /> },
+        { path: 'employee-profile', element: <EmployeeProfilePage /> },
         { path: 'calendar', element: <CalendarPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },

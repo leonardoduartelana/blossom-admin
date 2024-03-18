@@ -15,13 +15,19 @@ import {fShortenNumber} from 'src/utils/format-number';
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
 import RsEmployeeProfile from "../../api/data/RsEmployeeProfile";
+import {useRouter} from "../../routes/hooks";
 
 // ----------------------------------------------------------------------
 
 export default function EmployeeCard({employee}) {
 
+    const router = useRouter();
+
     const cardBackgroundUrl = employee.cardPictureUrl ? employee.cardPictureUrl : "/assets/ai_trainers/ai_personal_trainer_1.webp"
-    const avatarUrl = employee.avatarUrl ? employee.avatarUrl : "/assets/ai_trainers/avatar/ai_personal_trainer_avatar_1.webp"
+
+    const handleClick = () => {
+        router.push(`/employee-profile?employeeId=${employee.id}`)
+    }
 
     const renderCover = (
         <Box
@@ -40,7 +46,7 @@ export default function EmployeeCard({employee}) {
 
 
     return (
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={3} onClick={handleClick}>
             <Card>
                 <Box
                     sx={{

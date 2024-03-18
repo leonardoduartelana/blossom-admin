@@ -40,10 +40,6 @@ export default function EmployeesView() {
         }
     }, [employees])
 
-    const handleClick = (customer) => {
-        router.push(`/customer-profile?customerId=${customer.id}`)
-    }
-
     return (
         <Container>
             <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>

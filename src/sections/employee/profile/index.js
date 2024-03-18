@@ -1,1 +1,1 @@
-export { default as CustomerProfileView } from './customer-profile-view';
+export { default as EmployeeProfileView } from './employee-profile-view';
